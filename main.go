@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strconv"
-	"strings"
+
+	"github.com/devlights/gomy/convert"
 )
 
 func main() {
@@ -35,18 +35,5 @@ func run() int {
 
 // Convert -- 指定された2進数文字列を10進数に変換します.
 func Convert(v string) (string, error) {
-	if len(v) == 0 {
-		return "", nil
-	}
-
-	if strings.HasPrefix(v, "0b") {
-		v = strings.Replace(v, "0b", "", 1)
-	}
-
-	i, err := strconv.ParseInt(v, 2, 32)
-	if err != nil {
-		return "", err
-	}
-
-	return fmt.Sprintf("%d", i), nil
+	return convert.Bin2Dec(v, "", 0)
 }
